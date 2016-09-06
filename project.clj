@@ -1,4 +1,4 @@
-(defproject xmldsig "0.1.1-SNAPSHOT"
+(defproject org.clojars.sergeyminaev/xmldsig "0.1.1-SNAPSHOT"
 
   :description "Clojure library to make working with Java API for XMLDsig easier"
 
