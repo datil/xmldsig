@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><note>
+    <to>John</to>
+    <from>White</from>
+    <heading>Reminder</heading>
+    <body>Buy milk!</body>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>7qRGz9+yQJxZl2gi7P0L8ejAxLA=</DigestValue></Reference></SignedInfo><SignatureValue>NgbOVfrzvhq06iJsaBdUavt1pH46l4TW1Q+FZy9i0goWLnmtQ444Ys+EG5AJZheHFtJNr5hwEeKs
+gDf93R1r3IqYECUlEaBl2U+VW1s2/ydN9GxcKkrDirk9KOjF1Er8mb5F/f5kSuEfrOOjoq9fSQg+
+nS9N7bFlc15FY8Gu5UQ=</SignatureValue></Signature></note>

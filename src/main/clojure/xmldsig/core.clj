@@ -28,12 +28,10 @@
 
 
 (defn sign
-  ;; todo: add option to attach/not to attach certificate to the signature
   ;; todo: provide optional parameter with configuration map (signature method, canonicalization method, ...)
-  "Signs XML document using the given private key and attaching given X.509 certificate"
+  "Signs XML document using the given private key and attaching (if given) X.509 certificate."
   [^PrivateKey private-key ^X509Certificate cert ^String xml-string]
   (let [doc                                  (xml/parse xml-string)
-        public-key                           (.getPublicKey cert)
 
         ^DOMSignContext dsc                  (DOMSignContext. private-key (.getDocumentElement doc))
         ^XMLSignatureFactory fac             (XMLSignatureFactory/getInstance "DOM")
@@ -57,19 +55,13 @@
                                                  (.newSignatureMethod fac SignatureMethod/RSA_SHA1 nil)
                                                  (Collections/singletonList ref)))
 
-        ^KeyInfoFactory kif                  (.getKeyInfoFactory fac)
-
-        ; include either key or certificate, don't need to be both
-        ;^KeyValue kv (.newKeyValue kif public-key)
-
-        ^X509Data x509d                      (create-x509-data kif cert)
-
-        ^ArrayList ki-items                  (doto (ArrayList.)
-                                               ;(.add kv)
-                                               (.add x509d))
-
-        ^KeyInfo ki                          (.newKeyInfo kif ki-items)
-        ^XMLSignature signature              (.newXMLSignature fac si ki)]
+        ^KeyInfo ki                          (when cert
+                                               (let [^KeyInfoFactory kif (.getKeyInfoFactory fac)]
+                                                 (.newKeyInfo
+                                                  kif
+                                                  (doto (ArrayList.)
+                                                    (.add ^X509Data (create-x509-data kif cert))))))
+         ^XMLSignature signature              (.newXMLSignature fac si ki)]
 
     (.sign signature dsc)
     (xml/serialise doc)))
@@ -106,7 +98,7 @@
 
 
 (defn validate-signature
-  "Validates signature attached to the XML string with key matching key-selector. If signature is valid, returns KeyInfo
+  "Validates signature attached to the XML string with key matching key-selector. If signature is valid, returns KeyInfo (or true if no KeyInfo attached)
   used for signature validation, otherwise nil
 
   *DOES NOT VALIDATE CERTIFICATE CHAIN*"
@@ -127,7 +119,7 @@
               (doseq [^Reference ref (-> signature .getSignedInfo .getReferences)]
                 (let [ref-valid (.validate ref val-ctx)]
                   (warn "Reference URI" (str "'" (.getURI ref) "'") "validity status:" ref-valid))))
-          (.getKeyInfo signature))))))
+          (or (.getKeyInfo signature) true))))))
 
 
 (defn validate

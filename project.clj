@@ -1,4 +1,4 @@
-(defproject xmldsig "0.1.0-SNAPSHOT"
+(defproject xmldsig "0.1.1-SNAPSHOT"
 
   :description "Clojure library to make working with Java API for XMLDsig easier"
 
@@ -12,5 +12,5 @@
 
   :profiles {:test {:resource-paths ["test-resources"]}}
 
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/tools.logging "0.3.1"]])
