@@ -13,9 +13,9 @@
   (is (instance? X509Certificate (load-certificate "test-resources/test-user-cert.pem"))))
 
 
-;; todo: extract public key
-;(deftest load-public-key-test
-;  (is (instance? PublicKey (load-public-key "test-resources/test-user-key.pem"))))
+(deftest get-public-key-test
+  (is (instance? PublicKey (get-public-key
+                            (load-certificate "test-resources/test-user-cert.pem")))))
 
 
 (deftest load-private-key-test
