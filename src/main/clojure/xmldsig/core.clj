@@ -11,7 +11,7 @@
            [java.security.cert CertificateFactory Certificate X509Certificate X509CertSelector TrustAnchor PKIXBuilderParameters CertPathBuilder]
            [javax.xml.crypto KeySelector]
            [xmldsig X509KeySelector])
-  (require [clojure.java.io :as io]
+  (:require [clojure.java.io :as io]
            [clojure.tools.logging :refer [debug info warn error]]
            [xmldsig.xml :as xml]))
 
