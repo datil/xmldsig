@@ -13,4 +13,7 @@
   :profiles {:test {:resource-paths ["test-resources"]}}
 
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/tools.logging "0.4.1"]])
+                 [org.clojure/tools.logging "0.4.1"]]
+
+  :deploy-repositories [[:clojars {:sign-releases false}]]
+  )
